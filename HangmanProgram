@@ -1,0 +1,179 @@
+import java.io.*;
+import java.util.*;
+public class HangmanProgram
+{
+	public static void main(String args[])
+	{
+		Scanner choice = new Scanner(System.in);
+		
+		//Step 1
+		String words[] = {"inputting", "outputting", "words", "initialize", "earthquake", "anaphylaxis", "deconstruct", "inquire", "golf", "billionaire"};
+		
+		//Step 2
+		String alpha[] = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
+		
+		//Step 3
+		Random rn = new Random();
+		int x = rn.nextInt(10);
+		String word = words[x];
+		
+		//Step 4
+		int wrong = 0;
+		
+		//Step 5
+		int y = word.length();
+		String dash[] = new String[y];
+		
+		//Step 6
+		for(int j = 0; j < y; j++)
+		{
+			dash[j] = "-";
+		}
+		
+		//Step 7
+		boolean win = false;
+		boolean startgl = wrong <= 6;
+		while(startgl & (!win))
+		{
+			//Step 8
+			for(int i = 0; i <= 25; i++)
+			{
+				System.out.print(alpha[i] + " ");
+			}
+			//Step 9
+			switch(wrong)
+			{
+				case 0:
+					System.out.println(" ");
+					System.out.println("   ______");
+					System.out.println("   |    |");
+					System.out.println("   |");
+					System.out.println("   |");
+					System.out.println("   |");
+					System.out.println("   |");
+					System.out.println("___|________");
+					System.out.println(" ");
+					break;
+				case 1:
+					System.out.println(" ");
+					System.out.println("   ______");
+					System.out.println("   |    |");
+					System.out.println("   |   ( )");
+					System.out.println("   |");
+					System.out.println("   |");
+					System.out.println("   |");
+					System.out.println("___|________");
+					System.out.println(" ");
+					break;
+				case 2:
+					System.out.println(" ");
+					System.out.println("   ______");
+					System.out.println("   |    |");
+					System.out.println("   |   ( )");
+					System.out.println("   |    |");
+					System.out.println("   |    |");
+					System.out.println("   |");
+					System.out.println("___|________");
+					System.out.println(" ");
+					break;
+				case 3:
+					System.out.println(" ");
+					System.out.println("   ______");
+					System.out.println("   |    |");
+					System.out.println("   |   ( )");
+					System.out.println("   |    |");
+					System.out.println("   |    |");
+					System.out.println("   |   /");
+					System.out.println("___|________");
+					System.out.println(" ");
+					break;
+				case 4:
+					System.out.println(" ");
+					System.out.println("   ______");
+					System.out.println("   |    |");
+					System.out.println("   |   ( )");
+					System.out.println("   |    |");
+					System.out.println("   |    |");
+					System.out.println("   |   / \\");
+					System.out.println("___|________");
+					System.out.println(" ");
+					break;
+				case 5:
+					System.out.println(" ");
+					System.out.println("   ______");
+					System.out.println("   |    |");
+					System.out.println("   |   ( )");
+					System.out.println("   |   \\|");
+					System.out.println("   |    |");
+					System.out.println("   |   / \\");
+					System.out.println("___|________");
+					System.out.println(" ");
+					break;
+				case 6:	
+					System.out.println(" ");
+					System.out.println("   ______");
+					System.out.println("   |    |");
+					System.out.println("   |   ( )");
+					System.out.println("   |   \\|/");
+					System.out.println("   |    |");
+					System.out.println("   |   / \\");
+					System.out.println("___|________");
+					System.out.println("You lose!");
+					break;				
+			}	
+			//Step 10
+			if(wrong < 6)	
+			{
+				int crct=0;
+				int tc = 0;
+				for(int k = 0; k < y; k++)
+				{
+					System.out.print(dash[k]);
+				}
+				//Step 11
+				System.out.println(" ");
+				System.out.print("Enter your guess(lower case letters): "); 
+				String g = choice.nextLine();
+				//Step 12
+				for(int m = 0; m < word.length(); m++)
+				{
+					if(g.equals(word.substring(m, m + 1)))
+					{
+						dash[m] = word.substring(m, m + 1);
+						crct = 1;
+					}
+				}	
+				//Step 13
+				for(int p = 0; p < 26; p++)
+				{
+					if(alpha[p].equals(g))
+					{
+						alpha[p] = " ";
+					}
+				}
+				//Step 14
+				if(crct == 0)
+				{
+					wrong++;
+				}
+				for(int n = 0; n < word.length(); n++)
+				{
+					if(dash[n].equals("-"))
+					{
+						tc++;
+					}
+				}
+				if(tc == 0)
+				{
+					System.out.println("");
+					System.out.println(word);
+					win = true;
+					System.out.println("You win!!!");
+				}
+				 
+			}
+			else	
+				break;
+		}	
+	}
+}
